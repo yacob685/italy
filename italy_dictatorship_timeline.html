@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Italian Fascism: Flashcard Timeline</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Crimson+Text:wght@400;700&display=swap');
+        
+        :root {
+            --primary-color: #ce2b37; /* Italian Red */
+            --secondary-color: #009246; /* Italian Green */
+            --background-color: #e8dcc8; /* Warm off-white */
+            --card-bg: #fffbf5;
+            --text-color: #3a2a1a;
+            --border-color: #8b7355;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Crimson Text', serif;
+            background: linear-gradient(135deg, var(--background-color), #f4e8d0);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: var(--text-color);
+        }
+
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8em;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* --- Flashcard Container and Centering --- */
+        .flashcard-wrapper {
+            perspective: 1000px; /* For 3D effect */
+            width: 100%;
+            max-width: 450px;
+            height: 350px; /* Fixed height for clean presentation */
+            margin: 20px auto;
+            position: relative;
+        }
+
+        .flashcard {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .flashcard.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .flashcard-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            border: 4px solid var(--border-color);
+            border-radius: 10px;
+            background-color: var(--card-bg);
+        }
+
+        /* --- Front Face (The Question/Event) --- */
+        .flashcard-front {
+            z-index: 2;
+        }
+        
+        .card-date {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5em;
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+        
+        .card-title {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: var(--text-color);
+            line-height: 1.3;
+        }
+
+        .flip-prompt {
+            position: absolute;
+            bottom: 10px;
+            font-size: 0.8em;
+            color: rgba(58, 42, 26, 0.6);
+        }
+
+
+        /* --- Back Face (The Answer/Significance) --- */
+        .flashcard-back {
+            transform: rotateY(180deg);
+            background-color: #f7f3ed; /* Slightly different shade for the back */
+        }
+        
+        .card-significance-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2em;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+        
+        .card-significance {
+            text-align: left;
+            font-size: 1.05em;
+            line-height: 1.5;
+            max-height: 100%;
+            overflow-y: auto;
+        }
+        
+        /* --- Navigation Controls --- */
+        .navigation-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            max-width: 450px;
+            margin-top: 15px;
+        }
+
+        .nav-button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            font-family: 'Cinzel', serif;
+            transition: background 0.2s, transform 0.1s;
+        }
+
+        .nav-button:hover:not(:disabled) {
+            background: #dc3545;
+            transform: translateY(-2px);
+        }
+
+        .nav-button:disabled {
+            background: #ccc;
+            cursor: default;
+        }
+
+        #card-counter {
+            font-family: 'Crimson Text', serif;
+            font-weight: bold;
+            font-size: 1.1em;
+            color: var(--text-color);
+        }
+    </style>
+</head>
+<body>
+    
+    <h1>Italian Fascism: Timeline Flashcards</h1>
+
+    <div class="flashcard-wrapper">
+        <div id="flashcard" class="flashcard" onclick="flipCard()">
+            <!-- Card Front (Default Content) -->
+            <div id="card-front" class="flashcard-face flashcard-front">
+                <div class="card-date">March 23, 1919</div>
+                <div class="card-title">Fasci Italiani di Combattimento Founded</div>
+                <div class="flip-prompt">Click to reveal significance</div>
+            </div>
+            
+            <!-- Card Back (Default Content) -->
+            <div id="card-back" class="flashcard-face flashcard-back">
+                <div class="card-significance-title">Significance</div>
+                <div class="card-significance">The establishment of the original Fascist movement in Milan by Benito Mussolini, attracting war veterans and nationalists disillusioned with the postwar settlement.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="navigation-controls">
+        <button id="prev-btn" class="nav-button" onclick="prevCard()" disabled>← Previous</button>
+        <span id="card-counter">1 / 18</span>
+        <button id="next-btn" class="nav-button" onclick="nextCard()">Next →</button>
+    </div>
+
+    <script>
+        // Timeline Data: Date, Title (Front), Significance (Back)
+        const timelineData = [
+            {
+                date: "March 23, 1919",
+                title: "Fasci Italiani di Combattimento Founded",
+                significance: "The establishment of the original Fascist movement in Milan by Benito Mussolini, attracting war veterans and nationalists disillusioned with the postwar settlement. This marks the start of organized Fascism."
+            },
+            {
+                date: "1920-1921",
+                title: "Biennio Rosso & Rise of Squadrismo",
+                significance: "Two years of intense social unrest, strikes, and factory occupations ('Red Biennium'). The wealthy classes turned to Fascist 'squads' (Squadrismo) for violent repression, legitimizing the Fascists as a force against Communism."
+            },
+            {
+                date: "November 1921",
+                title: "Partito Nazionale Fascista Created",
+                significance: "The transformation of the movement into a formal political party (PNF). This brought discipline to the Squadristi and gave the movement electoral credibility, increasing its power base."
+            },
+            {
+                date: "October 28, 1922",
+                title: "The March on Rome",
+                significance: "A calculated political bluff where Fascist Blackshirts marched on the capital. King Victor Emmanuel III refused to declare martial law, leading to the collapse of the liberal government and Mussolini's legal appointment as Prime Minister."
+            },
+            {
+                date: "April 1924",
+                title: "Acerbo Law Elections",
+                significance: "The election was held under the new Acerbo Law, which guaranteed two-thirds of the seats to the party with the most votes (if they exceeded 25%). Fascists used widespread intimidation and violence to secure this majority."
+            },
+            {
+                date: "June 10, 1924",
+                title: "Matteotti Crisis",
+                significance: "Socialist opposition leader Giacomo Matteotti was murdered after publicly denouncing Fascist electoral fraud. This crisis nearly destroyed Mussolini's power, but the opposition's 'Aventine Secession' failed to force the King's hand."
+            },
+            {
+                date: "January 3, 1925",
+                title: "Mussolini's Dictatorship Speech",
+                significance: "Mussolini famously took full responsibility for the political violence, effectively declaring himself a dictator. This speech marked the definitive transition from a shaky coalition government to an authoritarian state."
+            },
+            {
+                date: "1925-1926",
+                title: "Leggi Fascistissime (Most Fascist Laws)",
+                significance: "A series of laws that systematically dismantled Italy's democratic structures, banning all opposition parties, outlawing free press, replacing elected mayors with appointed officials, and establishing the secret police (OVRA)."
+            },
+            {
+                date: "February 11, 1929",
+                title: "Lateran Pacts with Vatican",
+                significance: "A historic treaty establishing the Vatican City State and recognizing Catholicism as the state religion. This ended decades of conflict with the Church and granted Mussolini massive popular legitimacy among Italian Catholics."
+            },
+            {
+                date: "October 1935 - May 1936",
+                title: "Invasion of Ethiopia",
+                significance: "Italy's expansionist colonial war, driven by a desire for empire and revenge for a past defeat. The League of Nations imposed sanctions, pushing Mussolini closer to Hitler and increasing nationalist fervor at home."
+            },
+            {
+                date: "1936-1939",
+                title: "Spanish Civil War Intervention",
+                significance: "Italy sent substantial military aid to the Nationalist forces led by General Franco. This intervention cemented the ideological alignment between Fascist Italy and Nazi Germany (the 'Axis')."
+            },
+            {
+                date: "1938",
+                title: "Racial Laws (Leggi Razziali)",
+                significance: "Antisemitic laws based on the German model, stripping Jewish Italians of their civil rights and forbidding marriages between Jews and non-Jews. This was a result of the deepening alliance with Nazi Germany and an ideological shift."
+            },
+            {
+                date: "May 22, 1939",
+                title: "Pact of Steel with Germany",
+                significance: "A formal military and political alliance with Germany, committing Italy to support Germany in any war. Mussolini signed it despite Italy's military unpreparedness, locking them into the path toward World War II."
+            },
+            {
+                date: "June 10, 1940",
+                title: "Italy Enters World War II",
+                significance: "Mussolini declared war on Britain and France, hoping for 'a few thousand dead' to sit at the peace table. Italy's military proved catastrophically weak, necessitating heavy German support throughout the war."
+            },
+            {
+                date: "July 25, 1943",
+                title: "Fall of Mussolini & Grand Council Vote",
+                significance: "Following military setbacks and Allied invasion, the Fascist Grand Council voted against Mussolini. The King then dismissed and arrested him, signaling the end of the Fascist regime and Italy's attempt to exit the war."
+            },
+            {
+                date: "September 1943 - April 1945",
+                title: "Italian Social Republic (RSI)",
+                significance: "After being rescued by German commandos, Mussolini was installed as the puppet head of the German-occupied state in Northern Italy (Salo Republic). This period was marked by civil war between Fascists and partisans."
+            },
+            {
+                date: "April 28, 1945",
+                title: "Death of Mussolini & End of Fascism",
+                significance: "Mussolini was captured and executed by Italian partisans while trying to flee. His death marked the final, definitive end of the Fascist era in Italy."
+            }
+        ];
+        
+        // --- State Variables ---
+        let currentCardIndex = 0;
+        let isFlipped = false;
+
+        // --- DOM Elements ---
+        const flashcard = document.getElementById('flashcard');
+        const cardFront = document.getElementById('card-front');
+        const cardBack = document.getElementById('card-back');
+        const cardCounter = document.getElementById('card-counter');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+
+
+        // --- Core Functions ---
+
+        function renderCard() {
+            const data = timelineData[currentCardIndex];
+            
+            // Update Front Face
+            cardFront.innerHTML = `
+                <div class="card-date">${data.date}</div>
+                <div class="card-title">${data.title}</div>
+                <div class="flip-prompt">Click to reveal significance</div>
+            `;
+            
+            // Update Back Face
+            cardBack.innerHTML = `
+                <div class="card-significance-title">Significance</div>
+                <div class="card-significance">${data.significance}</div>
+            `;
+
+            // Reset flip state when moving to a new card
+            if (isFlipped) {
+                flashcard.classList.remove('flipped');
+                isFlipped = false;
+            }
+
+            // Update navigation and counter
+            cardCounter.textContent = `${currentCardIndex + 1} / ${timelineData.length}`;
+            prevBtn.disabled = currentCardIndex === 0;
+            nextBtn.disabled = currentCardIndex === timelineData.length - 1;
+        }
+
+        function flipCard() {
+            flashcard.classList.toggle('flipped');
+            isFlipped = !isFlipped;
+        }
+
+        function nextCard() {
+            if (currentCardIndex < timelineData.length - 1) {
+                currentCardIndex++;
+                renderCard();
+            }
+        }
+
+        function prevCard() {
+            if (currentCardIndex > 0) {
+                currentCardIndex--;
+                renderCard();
+            }
+        }
+
+        // --- Initialization ---
+        window.onload = renderCard;
+
+    </script>
+</body>
+</html>
