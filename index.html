@@ -12,36 +12,99 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7e8ba3 100%);
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(to bottom, #f4f1ea 0%, #e8e3d6 100%);
             min-height: 100vh;
             padding: 40px 20px;
-            color: #333;
+            color: #2c2416;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(139, 115, 85, 0.03) 2px, rgba(139, 115, 85, 0.03) 4px);
+            pointer-events: none;
+            z-index: 1;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, #f9f6f0 0%, #ebe6dc 100%);
+            border: 3px solid #8b7355;
+            border-radius: 8px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.5);
+            position: relative;
+        }
+
+        .flag-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            gap: 0;
+        }
+
+        .flag-stripe {
+            width: 80px;
+            height: 50px;
+            border: 2px solid #3a3a3a;
+        }
+
+        .flag-green {
+            background: #009246;
+            border-right: none;
+        }
+
+        .flag-white {
+            background: #F1F2F1;
+            border-right: none;
+        }
+
+        .flag-red {
+            background: #CE2B37;
         }
 
         h1 {
-            text-align: center;
-            color: white;
+            color: #3a2a1a;
             font-size: 2.5em;
             margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            font-weight: bold;
+            letter-spacing: 1px;
         }
 
         .subtitle {
-            text-align: center;
-            color: rgba(255,255,255,0.9);
+            color: #5a4a3a;
             font-size: 1.1em;
-            margin-bottom: 50px;
+            font-style: italic;
+            margin-top: 15px;
+        }
+
+        .date-range {
+            color: #8b7355;
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-top: 10px;
+            letter-spacing: 2px;
         }
 
         .timeline {
             position: relative;
-            padding: 20px 0;
+            padding: 40px 0;
         }
 
         .timeline::before {
@@ -49,14 +112,24 @@
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
-            width: 4px;
+            width: 6px;
             height: 100%;
-            background: linear-gradient(to bottom, #fff 0%, rgba(255,255,255,0.5) 100%);
-            border-radius: 2px;
+            background: repeating-linear-gradient(
+                to bottom,
+                #009246 0px,
+                #009246 33.33%,
+                #F1F2F1 33.33%,
+                #F1F2F1 66.66%,
+                #CE2B37 66.66%,
+                #CE2B37 100%
+            );
+            background-size: 100% 30px;
+            border: 2px solid #3a3a3a;
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
         }
 
         .timeline-item {
-            margin-bottom: 50px;
+            margin-bottom: 60px;
             position: relative;
             opacity: 0;
             animation: fadeInUp 0.6s ease forwards;
@@ -85,17 +158,25 @@
         .timeline-item:nth-child(10) { animation-delay: 1s; }
         .timeline-item:nth-child(11) { animation-delay: 1.1s; }
         .timeline-item:nth-child(12) { animation-delay: 1.2s; }
+        .timeline-item:nth-child(13) { animation-delay: 1.3s; }
+        .timeline-item:nth-child(14) { animation-delay: 1.4s; }
+        .timeline-item:nth-child(15) { animation-delay: 1.5s; }
+        .timeline-item:nth-child(16) { animation-delay: 1.6s; }
+        .timeline-item:nth-child(17) { animation-delay: 1.7s; }
+        .timeline-item:nth-child(18) { animation-delay: 1.8s; }
+        .timeline-item:nth-child(19) { animation-delay: 1.9s; }
+        .timeline-item:nth-child(20) { animation-delay: 2s; }
 
         .timeline-item:nth-child(odd) .content {
             margin-left: auto;
             margin-right: 50%;
-            padding-right: 50px;
+            padding-right: 60px;
             text-align: right;
         }
 
         .timeline-item:nth-child(even) .content {
             margin-left: 50%;
-            padding-left: 50px;
+            padding-left: 60px;
             text-align: left;
         }
 
@@ -103,87 +184,120 @@
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
-            width: 20px;
-            height: 20px;
-            background: white;
-            border: 4px solid #2a5298;
+            width: 24px;
+            height: 24px;
+            background: #f4f1ea;
+            border: 4px solid #8b7355;
             border-radius: 50%;
             z-index: 10;
-            top: 30px;
-            box-shadow: 0 0 0 4px rgba(255,255,255,0.2);
+            top: 35px;
+            box-shadow: 0 0 0 6px rgba(139, 115, 85, 0.2), 0 4px 8px rgba(0,0,0,0.3);
             transition: all 0.3s ease;
         }
 
         .timeline-item:hover .timeline-dot {
             transform: translateX(-50%) scale(1.3);
-            box-shadow: 0 0 0 8px rgba(255,255,255,0.3);
+            box-shadow: 0 0 0 10px rgba(139, 115, 85, 0.3), 0 6px 12px rgba(0,0,0,0.4);
+            background: #CE2B37;
         }
 
         .content {
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            background: linear-gradient(135deg, #fdfcf9 0%, #f5f2eb 100%);
+            padding: 25px 30px;
+            border: 3px solid #8b7355;
+            border-radius: 8px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.6);
             transition: all 0.3s ease;
             cursor: pointer;
             position: relative;
+            background-image: 
+                repeating-linear-gradient(0deg, transparent, transparent 20px, rgba(139, 115, 85, 0.02) 20px, rgba(139, 115, 85, 0.02) 22px);
+        }
+
+        .content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(to right, #009246 0%, #009246 33.33%, #F1F2F1 33.33%, #F1F2F1 66.66%, #CE2B37 66.66%, #CE2B37 100%);
+            border-radius: 5px 5px 0 0;
         }
 
         .content:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.6);
+            border-color: #6a5a45;
         }
 
         .date {
             font-weight: bold;
-            color: #2a5298;
-            font-size: 1.1em;
-            margin-bottom: 10px;
+            color: #CE2B37;
+            font-size: 1.2em;
+            margin-bottom: 12px;
             display: inline-block;
-            padding: 5px 12px;
-            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            padding: 8px 16px;
+            background: linear-gradient(135deg, #fef9f3 0%, #f5ebe0 100%);
+            border: 2px solid #CE2B37;
             border-radius: 6px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-family: 'Georgia', serif;
         }
 
         .event-title {
-            font-size: 1.3em;
-            font-weight: 600;
-            color: #1e3c72;
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #2c2416;
             margin-bottom: 12px;
             line-height: 1.4;
+            font-family: 'Georgia', serif;
         }
 
         .significance {
-            color: #555;
-            line-height: 1.6;
+            color: #4a3a2a;
+            line-height: 1.8;
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.4s ease, margin-top 0.4s ease;
-            font-size: 0.95em;
+            font-size: 1em;
+            text-align: justify;
+            border-left: 4px solid transparent;
+            padding-left: 0;
         }
 
         .content.active .significance {
-            max-height: 500px;
-            margin-top: 10px;
-            padding-top: 10px;
-            border-top: 2px solid #e0e0e0;
+            max-height: 600px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 3px double #8b7355;
+            border-left: 4px solid #009246;
+            padding-left: 15px;
         }
 
         .click-hint {
-            font-size: 0.85em;
-            color: #888;
+            font-size: 0.9em;
+            color: #8b7355;
             font-style: italic;
-            margin-top: 8px;
+            margin-top: 10px;
             transition: opacity 0.3s;
+            font-weight: 500;
         }
 
         .content.active .click-hint {
             opacity: 0;
+            display: none;
         }
 
         @media (max-width: 768px) {
             h1 {
                 font-size: 1.8em;
+            }
+
+            .flag-stripe {
+                width: 50px;
+                height: 35px;
             }
 
             .timeline::before {
@@ -208,23 +322,54 @@
             }
 
             .event-title {
-                font-size: 1.1em;
+                font-size: 1.2em;
             }
         }
 
-        .legend {
+        .footer {
             text-align: center;
-            color: white;
-            margin-top: 50px;
-            font-size: 0.9em;
-            opacity: 0.8;
+            margin-top: 60px;
+            padding: 25px;
+            background: linear-gradient(135deg, #f9f6f0 0%, #ebe6dc 100%);
+            border: 3px solid #8b7355;
+            border-radius: 8px;
+            color: #5a4a3a;
+            font-style: italic;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        .footer-title {
+            font-weight: bold;
+            font-size: 1.1em;
+            color: #3a2a1a;
+            margin-bottom: 8px;
+        }
+
+        .watermark {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            font-size: 0.8em;
+            color: rgba(139, 115, 85, 0.5);
+            font-style: italic;
+            z-index: 1;
         }
     </style>
 </head>
 <body>
+    <div class="watermark">Historical Research Document</div>
+    
     <div class="container">
-        <h1>Italian Fascism: Historical Timeline</h1>
-        <p class="subtitle">Click on any event to reveal its historical significance</p>
+        <div class="header">
+            <div class="flag-container">
+                <div class="flag-stripe flag-green"></div>
+                <div class="flag-stripe flag-white"></div>
+                <div class="flag-stripe flag-red"></div>
+            </div>
+            <h1>Italian Fascism</h1>
+            <div class="date-range">1919 — 1945</div>
+            <p class="subtitle">A Comprehensive Historical Timeline</p>
+        </div>
         
         <div class="timeline">
             <div class="timeline-item">
@@ -235,7 +380,7 @@
                     <div class="significance">
                         Benito Mussolini established the Fasci Italiani di Combattimento (Italian Combat Squads) in Milan. This marked the official birth of the Fascist movement in Italy. Initially a small group of war veterans and nationalist activists, this organization would eventually transform into the National Fascist Party and seize control of the Italian government.
                     </div>
-                    <div class="click-hint">Click to reveal significance</div>
+                    <div class="click-hint">► Click to reveal historical significance</div>
                 </div>
             </div>
 
@@ -247,7 +392,7 @@
                     <div class="significance">
                         Fascist squads, known as "Squadristi" or Blackshirts, intensified their violent campaigns against socialist organizations, trade unions, and political opponents. These paramilitary groups attacked socialist headquarters, burned newspaper offices, and assaulted political rivals, establishing a pattern of political violence that would characterize Italian Fascism.
                     </div>
-                    <div class="click-hint">Click to reveal significance</div>
+                    <div class="click-hint">► Click to reveal historical significance</div>
                 </div>
             </div>
 
@@ -259,7 +404,7 @@
                     <div class="significance">
                         The Fasci Italiani di Combattimento was transformed into the Partito Nazionale Fascista (National Fascist Party). This reorganization gave the movement greater political legitimacy and structure, positioning it as a formal political party capable of participating in elections while maintaining its paramilitary wing.
                     </div>
-                    <div class="click-hint">Click to reveal significance</div>
+                    <div class="click-hint">► Click to reveal historical significance</div>
                 </div>
             </div>
 
@@ -271,7 +416,7 @@
                     <div class="significance">
                         Approximately 30,000 Fascist Blackshirts marched on Rome in a show of force that proved to be a pivotal moment in Italian history. Rather than deploying the army to stop them, King Victor Emmanuel III invited Mussolini to form a government, effectively handing power to the Fascists through political intimidation rather than direct military conflict.
                     </div>
-                    <div class="click-hint">Click to reveal significance</div>
+                    <div class="click-hint">► Click to reveal historical significance</div>
                 </div>
             </div>
 
@@ -283,7 +428,7 @@
                     <div class="significance">
                         At age 39, Benito Mussolini became the youngest Prime Minister in Italian history. Initially leading a coalition government, Mussolini would gradually consolidate power and transform Italy from a constitutional monarchy with parliamentary democracy into a one-party Fascist dictatorship.
                     </div>
-                    <div class="click-hint">Click to reveal significance</div>
+                    <div class="click-hint">► Click to reveal historical significance</div>
                 </div>
             </div>
 
@@ -295,7 +440,7 @@
                     <div class="significance">
                         The Acerbo Law gave two-thirds of parliamentary seats to the party winning the most votes. After the Fascists won the 1924 election, Socialist leader Giacomo Matteotti was murdered after denouncing electoral fraud. This crisis nearly toppled Mussolini, but he survived and used it as justification to eliminate all opposition and establish a dictatorship.
                     </div>
-                    <div class="click-hint">Click to reveal significance</div>
+                    <div class="click-hint">► Click to reveal historical significance</div>
                 </div>
             </div>
 
@@ -307,7 +452,7 @@
                     <div class="significance">
                         Mussolini passed a series of laws that dismantled democratic institutions: opposition parties were banned, press censorship was imposed, independent trade unions were suppressed, and local elections were eliminated. The OVRA secret police was created to suppress dissent. Mussolini assumed the title "Il Duce" (The Leader) and became both head of government and dictator.
                     </div>
-                    <div class="click-hint">Click to reveal significance</div>
+                    <div class="click-hint">► Click to reveal historical significance</div>
                 </div>
             </div>
 
@@ -319,7 +464,7 @@
                     <div class="significance">
                         The Lateran Treaty between Mussolini and Pope Pius XI resolved the "Roman Question" that had existed since Italian unification. The treaty recognized Vatican City as an independent state, gave the Catholic Church significant financial compensation, and made Catholicism the official state religion. This greatly increased Mussolini's legitimacy and support among the Italian population.
                     </div>
-                    <div class="click-hint">Click to reveal significance</div>
+                    <div class="click-hint">► Click to reveal historical significance</div>
                 </div>
             </div>
 
@@ -331,7 +476,7 @@
                     <div class="significance">
                         Italy invaded Ethiopia (Abyssinia) in a brutal colonial war that included the use of poison gas against civilians. Despite international condemnation and League of Nations sanctions, Italy successfully conquered Ethiopia by May 1936. This aggression demonstrated the weakness of international institutions and emboldened other fascist powers, particularly Nazi Germany.
                     </div>
-                    <div class="click-hint">Click to reveal significance</div>
+                    <div class="click-hint">► Click to reveal historical significance</div>
                 </div>
             </div>
 
@@ -343,7 +488,7 @@
                     <div class="significance">
                         Mussolini and Adolf Hitler formed a political alliance known as the Rome-Berlin Axis. This partnership aligned Fascist Italy with Nazi Germany, marking Italy's shift away from its traditional allies (Britain and France) and setting the stage for Italy's participation in World War II on the side of the Axis powers.
                     </div>
-                    <div class="click-hint">Click to reveal significance</div>
+                    <div class="click-hint">► Click to reveal historical significance</div>
                 </div>
             </div>
 
@@ -355,7 +500,7 @@
                     <div class="significance">
                         Following Nazi Germany's example, Mussolini introduced the "Manifesto of Race" and subsequent racial laws that discriminated against Italian Jews. These laws banned marriage between Jews and non-Jews, excluded Jews from public office and education, and confiscated Jewish property. This marked a significant radicalization of Italian Fascism under German influence.
                     </div>
-                    <div class="click-hint">Click to reveal significance</div>
+                    <div class="click-hint">► Click to reveal historical significance</div>
                 </div>
             </div>
 
@@ -365,9 +510,9 @@
                     <div class="date">June 10, 1940</div>
                     <div class="event-title">Italy Enters World War II</div>
                     <div class="significance">
-                        After initially remaining neutral, Mussolini declared war on France and Britain, bringing Italy into World War II on Germany's side. Believing Germany's victory was imminent, Mussolini sought territorial gains and imperial glory. However, Italy's military campaigns would prove disastrous, leading to defeats in Greece, North Africa, and East Africa, ultimately contributing to Mussolini's downfall and the collapse of Italian Fascism.
+                        After initially remaining neutral, Mussolini declared war on France and Britain, bringing Italy into World War II on Germany's side. Believing Germany's victory was imminent, Mussolini sought territorial gains and imperial glory. However, Italy's military campaigns would prove disastrous, leading to defeats in Greece, North Africa, and East Africa.
                     </div>
-                    <div class="click-hint">Click to reveal significance</div>
+                    <div class="click-hint">► Click to reveal historical significance</div>
                 </div>
             </div>
 
@@ -379,7 +524,7 @@
                     <div class="significance">
                         Italy invaded Greece from Albania, expecting a quick victory. Instead, Greek forces pushed the Italians back into Albania, inflicting a humiliating defeat. Nazi Germany was forced to intervene to bail out Italy, revealing the weakness of the Italian military and damaging Mussolini's prestige both domestically and internationally.
                     </div>
-                    <div class="click-hint">Click to reveal significance</div>
+                    <div class="click-hint">► Click to reveal historical significance</div>
                 </div>
             </div>
 
@@ -391,7 +536,7 @@
                     <div class="significance">
                         Italian forces suffered major defeats against British and Commonwealth forces in North Africa. Despite German support under Rommel, Italy lost its Libyan colonies and its East African empire. These defeats further exposed the inadequacy of Italy's military preparedness and the regime's empty promises of imperial glory.
                     </div>
-                    <div class="click-hint">Click to reveal significance</div>
+                    <div class="click-hint">► Click to reveal historical significance</div>
                 </div>
             </div>
 
@@ -403,7 +548,7 @@
                     <div class="significance">
                         Allied forces landed in Sicily, beginning the invasion of Italy itself. The invasion exposed Italy's military weakness and brought the war directly to Italian soil, causing civilian suffering and eroding support for Mussolini's regime. This military crisis set the stage for Mussolini's removal from power.
                     </div>
-                    <div class="click-hint">Click to reveal significance</div>
+                    <div class="click-hint">► Click to reveal historical significance</div>
                 </div>
             </div>
 
@@ -415,7 +560,7 @@
                     <div class="significance">
                         The Fascist Grand Council voted against Mussolini, and King Victor Emmanuel III ordered his arrest. Marshal Pietro Badoglio became Prime Minister and began secret negotiations with the Allies. After 21 years in power, Mussolini's dictatorship ended not through popular revolution but through an internal coup by his own party and the monarchy.
                     </div>
-                    <div class="click-hint">Click to reveal significance</div>
+                    <div class="click-hint">► Click to reveal historical significance</div>
                 </div>
             </div>
 
@@ -427,7 +572,7 @@
                     <div class="significance">
                         Italy signed an armistice with the Allied forces, effectively switching sides in the war. German forces immediately occupied most of Italy, disarmed Italian troops, and treated Italy as an enemy. The country was divided between Allied-controlled south and German-occupied north, beginning a brutal civil war period.
                     </div>
-                    <div class="click-hint">Click to reveal significance</div>
+                    <div class="click-hint">► Click to reveal historical significance</div>
                 </div>
             </div>
 
@@ -439,7 +584,7 @@
                     <div class="significance">
                         German commandos led by Otto Skorzeny rescued Mussolini from imprisonment in a daring mountain-top raid. Hitler installed Mussolini as the puppet leader of the Italian Social Republic (Republic of Salò) in German-occupied northern Italy. This regime was entirely dependent on German military support and represented fascism's final, desperate phase.
                     </div>
-                    <div class="click-hint">Click to reveal significance</div>
+                    <div class="click-hint">► Click to reveal historical significance</div>
                 </div>
             </div>
 
@@ -451,7 +596,7 @@
                     <div class="significance">
                         Italy descended into civil war between Mussolini's fascist loyalists in the north, backed by Germany, and the Italian resistance movements (partisans) fighting alongside Allied forces. This brutal conflict saw widespread atrocities, including massacres of civilians and harsh German reprisals against partisan activities, tearing Italian society apart.
                     </div>
-                    <div class="click-hint">Click to reveal significance</div>
+                    <div class="click-hint">► Click to reveal historical significance</div>
                 </div>
             </div>
 
@@ -463,7 +608,7 @@
                     <div class="significance">
                         Allied forces and Italian partisans liberated northern Italy from German occupation. The Italian Social Republic collapsed as German forces retreated. April 25 became known as Liberation Day (Festa della Liberazione), a national holiday in Italy commemorating the end of fascist rule and Nazi occupation.
                     </div>
-                    <div class="click-hint">Click to reveal significance</div>
+                    <div class="click-hint">► Click to reveal historical significance</div>
                 </div>
             </div>
 
@@ -475,7 +620,7 @@
                     <div class="significance">
                         While attempting to flee to Switzerland, Mussolini was captured by Italian communist partisans near Lake Como. He was executed along with his mistress Clara Petacci and other Fascist officials. Their bodies were taken to Milan and hung upside down in Piazzale Loreto, where they were subjected to public abuse. This brutal end symbolized the complete collapse of Italian Fascism and served as a stark warning to other fascist leaders.
                     </div>
-                    <div class="click-hint">Click to reveal significance</div>
+                    <div class="click-hint">► Click to reveal historical significance</div>
                 </div>
             </div>
 
@@ -487,13 +632,14 @@
                     <div class="significance">
                         German forces in Italy officially surrendered to Allied forces, ending World War II in Italy. This marked the definitive end of fascist rule in Italy. The country faced the enormous task of rebuilding from the devastation of war, addressing the legacy of fascism, and transitioning to democracy. Italy would adopt a new republican constitution in 1948, officially ending the monarchy and establishing the Italian Republic.
                     </div>
-                    <div class="click-hint">Click to reveal significance</div>
+                    <div class="click-hint">► Click to reveal historical significance</div>
                 </div>
             </div>
         </div>
 
-        <div class="legend">
-            Interactive Timeline | Click any event to explore its historical significance
+        <div class="footer">
+            <div class="footer-title">Historical Research Timeline</div>
+            Interactive educational resource documenting the rise and fall of Italian Fascism
         </div>
     </div>
 
